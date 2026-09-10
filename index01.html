@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্রো ডিজিটাল প্ল্যাটফর্ম - আলটিমেট সিএমএস</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0c10;
+            --card-bg: rgba(22, 27, 34, 0.8);
+            --primary-glow: linear-gradient(135deg, #7c3aed, #06b6d4);
+            --neon-border: rgba(124, 58, 237, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+
+        .lighting-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        .glow-orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.4; animation: float 10s infinite alternate ease-in-out; }
+        .orb-1 { top: -10%; left: 20%; width: 400px; height: 400px; background: #7c3aed; }
+        .orb-2 { bottom: -10%; right: 15%; width: 450px; height: 450px; background: #06b6d4; }
+        @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-40px); } }
+
+        header { background: rgba(10, 12, 16, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--neon-border); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 22px; font-weight: 800; background: var(--primary-glow); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-btns { display: flex; gap: 10px; align-items: center; }
+
+        .btn { padding: 8px 16px; border-radius: 30px; border: none; font-weight: 600; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; }
+        .btn-glow { background: var(--primary-glow); color: #fff; box-shadow: 0 0 12px rgba(124, 58, 237, 0.4); }
+        .btn-glow:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(6, 182, 212, 0.6); }
+        .btn-outline { background: transparent; color: var(--text-main); border: 1px solid var(--neon-border); }
+        .btn-danger { background: #ef4444; color: #fff; }
+
+        .role-badge { background: rgba(6, 182, 212, 0.2); border: 1px solid #06b6d4; color: #06b6d4; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+
+        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; flex: 1; }
+        .glass-card { background: var(--card-bg); backdrop-filter: blur(12px); border: 1px solid var(--neon-border); border-radius: 18px; padding: 25px; margin-bottom: 25px; box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37); }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 600; color: var(--text-muted); font-size: 14px; }
+        .form-control { width: 100%; padding: 10px 14px; border-radius: 10px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--neon-border); color: #fff; font-size: 14px; outline: none; transition: 0.3s; }
+        .form-control:focus { border-color: #06b6d4; box-shadow: 0 0 8px rgba(6, 182, 212, 0.3); }
+
+        .controls-bar { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .search-box { flex: 1; min-width: 200px; }
+
+        .post-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+        .post-card { background: var(--card-bg); border: 1px solid var(--neon-border); border-radius: 16px; padding: 20px; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
+        .post-card:hover { transform: translateY(-4px); border-color: #06b6d4; }
+        .post-img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 12px; }
+
+        .post-actions { display: flex; gap: 15px; margin-top: 15px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 13px; color: var(--text-muted); }
+        .action-btn { cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 5px; }
+        .action-btn:hover { color: #06b6d4; }
+
+        .comment-section { margin-top: 12px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; font-size: 13px; }
+        .comment-item { border-bottom: 1px dashed rgba(255,255,255,0.1); padding: 5px 0; }
+
+        .auth-container { max-width: 420px; margin: 30px auto; }
+        .hidden { display: none !important; }
+
+        footer { text-align: center; padding: 20px; background: rgba(10, 12, 16, 0.9); border-top: 1px solid var(--neon-border); color: var(--text-muted); font-size: 13px; }
+    </style>
+</head>
+<body>
+
+    <div class="lighting-bg">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <header>
+        <div class="logo"><i class="fa-solid fa-bolt"></i> PRO PLATFORM</div>
+        <div class="nav-btns">
+            <span id="userInfo" style="font-weight:600; font-size:13px;"></span>
+            <span id="userRoleBadge" class="role-badge hidden"></span>
+            <button class="btn btn-outline hidden" id="btnLogout" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> লগআউট</button>
+            <button class="btn btn-glow" id="btnAuthNav" onclick="toggleAuthModal()"><i class="fa-solid fa-user"></i> লগইন</button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- অথেন্টিকেশন ফর্ম -->
+        <div id="authSection" class="glass-card auth-container hidden">
+            <h2 id="authTitle" style="text-align: center; margin-bottom: 15px;">রেজিস্ট্রেশন করুন</h2>
+            
+            <form id="authForm">
+                <div class="form-group" id="nameGroup">
+                    <label>আপনার নাম</label>
+                    <input type="text" id="regName" class="form-control" placeholder="আপনার নাম">
+                </div>
+                <div class="form-group">
+                    <label>ইমেইল এড্রেস</label>
+                    <input type="email" id="authEmail" class="form-control" placeholder="example@mail.com" required>
+                </div>
+                <div class="form-group">
+                    <label>পাসওয়ার্ড</label>
+                    <input type="password" id="authPass" class="form-control" placeholder="******" required>
+                </div>
+                <button type="button" class="btn btn-glow" style="width:100%; justify-content:center;" onclick="handleAuth()">সম্পন্ন করুন</button>
+            </form>
+            
+            <div style="text-align:center; margin-top:15px; font-size:13px; color:var(--text-muted);">
+                <span id="authToggleText">একাউন্ট আছে?</span> 
+                <a href="javascript:void(0)" style="color:#06b6d4; font-weight:600;" onclick="switchAuthMode()">এখানে ক্লিক করুন</a>
+                <br><br>
+                <a href="javascript:void(0)" style="color:#94a3b8; font-size:12px;" onclick="resetPassword()">পাসওয়ার্ড ভুলে গেছেন?</a>
+            </div>
+        </div>
+
+        <!-- এডমিন কন্ট্রোল প্যানেল -->
+        <div id="adminPanel" class="glass-card hidden">
+            <h3><i class="fa-solid fa-shield-halved" style="color: #06b6d4;"></i> এডমিন পোস্ট তৈরি ও এডিটর</h3>
+            <br>
+            <input type="hidden" id="editPostId">
+            <div class="form-group">
+                <label>পোস্টের শিরোনাম</label>
+                <input type="text" id="postTitle" class="form-control" placeholder="শিরোনাম...">
+            </div>
+            <div class="form-group">
+                <label>ক্যাটাগরি</label>
+                <select id="postCategory" class="form-control">
+                    <option value="নোটিশ">নোটিশ</option>
+                    <option value="টিউটোরিয়াল">টিউটোরিয়াল</option>
+                    <option value="সংবাদ">সংবাদ</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>ছবি লিঙ্ক (Image URL)</label>
+                <input type="text" id="postImgUrl" class="form-control" placeholder="https://example.com/image.jpg">
+            </div>
+            <div class="form-group">
+                <label>বিস্তারিত বিবরণ</label>
+                <textarea id="postContent" class="form-control" rows="4" placeholder="আপনার বিবরণ..."></textarea>
+            </div>
+            <button class="btn btn-glow" onclick="savePost()"><i class="fa-solid fa-cloud-arrow-up"></i> পাবলিশ করুন</button>
+        </div>
+
+        <!-- সার্চ ও ফিল্টার বার -->
+        <div class="glass-card">
+            <div class="controls-bar">
+                <div class="search-box">
+                    <input type="text" id="searchInput" class="form-control" placeholder="🔍 পোস্ট খুঁজুন..." onkeyup="filterPosts()">
+                </div>
+                <div>
+                    <select id="categoryFilter" class="form-control" onchange="filterPosts()">
+                        <option value="সব">সব ক্যাটাগরি</option>
+                        <option value="নোটিশ">নোটিশ</option>
+                        <option value="টিউটোরিয়াল">টিউটোরিয়াল</option>
+                        <option value="সংবাদ">সংবাদ</option>
+                    </select>
+                </div>
+            </div>
+
+            <h2><i class="fa-solid fa-newspaper"></i> সাম্প্রতিক পোস্টসমূহ</h2>
+            <br>
+            <div class="post-grid" id="postsContainer">
+                <p>পোস্ট লোড হচ্ছে...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 PRO PLATFORM. সর্বস্বত্ব সংরক্ষিত।</p>
+    </footer>
+
+    <!-- Firebase v10 SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, getDoc, setDoc, updateDoc, deleteDoc, doc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDvUrskx4nuEZ-Bh7V8p80u9GpO7barUR4",
+            authDomain: "mehedi-hasan-944f2.firebaseapp.com",
+            projectId: "mehedi-hasan-944f2",
+            storageBucket: "mehedi-hasan-944f2.firebasestorage.app",
+            messagingSenderId: "781590059447",
+            appId: "1:781590059447:web:7618364c581362982bb032"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        let isLoginMode = false;
+        let currentUser = null;
+        let currentUserRole = 'user';
+        let allPostsData = [];
+
+        const PRIMARY_ADMIN_EMAIL = "admin@gmail.com";
+
+        onAuthStateChanged(auth, async (user) => {
+            currentUser = user;
+            if (user) {
+                try {
+                    const userDoc = await getDoc(doc(db, "users", user.uid));
+                    currentUserRole = userDoc.exists() ? (userDoc.data().role || 'user') : ((user.email === PRIMARY_ADMIN_EMAIL) ? 'admin' : 'user');
+                } catch (e) {
+                    currentUserRole = (user.email === PRIMARY_ADMIN_EMAIL) ? 'admin' : 'user';
+                }
+
+                document.getElementById('userInfo').textContent = user.email;
+                document.getElementById('userRoleBadge').textContent = currentUserRole;
+                document.getElementById('userRoleBadge').classList.remove('hidden');
+                document.getElementById('btnLogout').classList.remove('hidden');
+                document.getElementById('btnAuthNav').classList.add('hidden');
+                document.getElementById('authSection').classList.add('hidden');
+
+                if (currentUserRole === 'admin') document.getElementById('adminPanel').classList.remove('hidden');
+            } else {
+                currentUserRole = 'guest';
+                document.getElementById('userInfo').textContent = '';
+                document.getElementById('userRoleBadge').classList.add('hidden');
+                document.getElementById('btnLogout').classList.add('hidden');
+                document.getElementById('btnAuthNav').classList.remove('hidden');
+                document.getElementById('adminPanel').classList.add('hidden');
+            }
+            loadPosts();
+        });
+
+        window.handleAuth = async function() {
+            const email = document.getElementById('authEmail').value.trim();
+            const pass = document.getElementById('authPass').value;
+            const name = document.getElementById('regName').value.trim();
+
+            if (!email || !pass) return alert("ইমেইল ও পাসওয়ার্ড লিখুন!");
+
+            try {
+                if (isLoginMode) {
+                    await signInWithEmailAndPassword(auth, email, pass);
+                    alert("লগইন সফল!");
+                } else {
+                    const res = await createUserWithEmailAndPassword(auth, email, pass);
+                    const assignedRole = (email === PRIMARY_ADMIN_EMAIL) ? 'admin' : 'user';
+                    await setDoc(doc(db, "users", res.user.uid), { name: name || "ইউজার", email, role: assignedRole, createdAt: serverTimestamp() });
+                    alert("একাউন্ট তৈরি হয়েছে!");
+                }
+            } catch (err) { alert("ত্রুটি: " + err.message); }
+        };
+
+        window.resetPassword = async function() {
+            const email = prompt("পাসওয়ার্ড রিসেট করতে ইমেইল লিখুন:");
+            if (email) {
+                try { await sendPasswordResetEmail(auth, email); alert("ইমেইলে লিঙ্ক পাঠানো হয়েছে!"); }
+                catch (err) { alert("ত্রুটি: " + err.message); }
+            }
+        };
+
+        window.logout = () => signOut(auth);
+
+        window.switchAuthMode = function() {
+            isLoginMode = !isLoginMode;
+            document.getElementById('authTitle').innerText = isLoginMode ? "লগইন করুন" : "রেজিস্ট্রেশন করুন";
+            document.getElementById('nameGroup').classList.toggle('hidden', isLoginMode);
+            document.getElementById('authToggleText').innerText = isLoginMode ? "নতুন একাউন্ট করতে চান?" : "একাউন্ট আছে?";
+        };
+
+        window.savePost = async function() {
+            if (currentUserRole !== 'admin') return alert("অনুমতি নেই!");
+            const title = document.getElementById('postTitle').value;
+            const category = document.getElementById('postCategory').value;
+            const imgUrl = document.getElementById('postImgUrl').value;
+            const content = document.getElementById('postContent').value;
+            const editId = document.getElementById('editPostId').value;
+
+            if (!title || !content) return alert("শিরোনাম ও বিবরণ দিন!");
+
+            try {
+                if (editId) {
+                    await updateDoc(doc(db, "posts", editId), { title, category, imgUrl, content });
+                    document.getElementById('editPostId').value = '';
+                } else {
+                    await addDoc(collection(db, "posts"), { title, category, imgUrl, content, likes: 0, comments: [], created: serverTimestamp() });
+                }
+                document.getElementById('postTitle').value = '';
+                document.getElementById('postImgUrl').value = '';
+                document.getElementById('postContent').value = '';
+                loadPosts();
+            } catch (err) { alert("ত্রুটি: " + err.message); }
+        };
+
+        async function loadPosts() {
+            const container = document.getElementById('postsContainer');
+            try {
+                const q = query(collection(db, "posts"), orderBy("created", "desc"));
+                const snap = await getDocs(q);
+                allPostsData = [];
+                snap.forEach(d => allPostsData.push({ id: d.id, ...d.data() }));
+                renderPosts(allPostsData);
+            } catch (e) { container.innerHTML = '<p>পোস্ট লোড করা যাচ্ছে না।</p>'; }
+        }
+
+        function renderPosts(posts) {
+            const container = document.getElementById('postsContainer');
+            let html = '';
+            posts.forEach(p => {
+                const isAdmin = currentUserRole === 'admin';
+                html += `
+                    <div class="post-card">
+                        <div>
+                            ${p.imgUrl ? `<img src="${p.imgUrl}" class="post-img" alt="image">` : ''}
+                            <span class="role-badge">${p.category || 'সাধারণ'}</span>
+                            <h3 style="margin-top:8px;">${p.title}</h3>
+                            <p style="margin-top:8px; color:var(--text-muted); font-size:14px;">${p.content}</p>
+                        </div>
+                        <div>
+                            <div class="post-actions">
+                                <div class="action-btn" onclick="likePost('${p.id}', ${p.likes || 0})"><i class="fa-regular fa-thumbs-up"></i> ${p.likes || 0} লাইক</div>
+                                <div class="action-btn" onclick="addComment('${p.id}')"><i class="fa-regular fa-comment"></i> কমেন্ট</div>
+                            </div>
+                            <div class="comment-section">
+                                ${(p.comments || []).map(c => `<div class="comment-item"><b>${c.user}:</b> ${c.text}</div>`).join('')}
+                            </div>
+                            ${isAdmin ? `
+                                <div style="margin-top:10px; display:flex; gap:8px;">
+                                    <button class="btn btn-outline" style="padding:2px 8px; font-size:11px;" onclick="editPost('${p.id}', '${p.title}', '${p.content}')">এডিট</button>
+                                    <button class="btn btn-danger" style="padding:2px 8px; font-size:11px;" onclick="deletePost('${p.id}')">ডিলিট</button>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html || '<p>কোনো পোস্ট পাওয়া যায়নি।</p>';
+        }
+
+        window.filterPosts = function() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const cat = document.getElementById('categoryFilter').value;
+            const filtered = allPostsData.filter(p => {
+                const matchesSearch = p.title.toLowerCase().includes(search) || p.content.toLowerCase().includes(search);
+                const matchesCat = (cat === 'সব') || (p.category === cat);
+                return matchesSearch && matchesCat;
+            });
+            renderPosts(filtered);
+        };
+
+        window.likePost = async function(id, currentLikes) {
+            await updateDoc(doc(db, "posts", id), { likes: currentLikes + 1 });
+            loadPosts();
+        };
+
+        window.addComment = async function(id) {
+            if (!currentUser) return alert("কমেন্ট করতে লগইন করুন!");
+            const text = prompt("আপনার কমেন্ট লিখুন:");
+            if (text) {
+                const postRef = doc(db, "posts", id);
+                const postSnap = await getDoc(postRef);
+                const comments = postSnap.data().comments || [];
+                comments.push({ user: currentUser.email.split('@')[0], text });
+                await updateDoc(postRef, { comments });
+                loadPosts();
+            }
+        };
+
+        window.editPost = (id, title, content) => {
+            document.getElementById('editPostId').value = id;
+            document.getElementById('postTitle').value = title;
+            document.getElementById('postContent').value = content;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        window.deletePost = async (id) => {
+            if (confirm("ডিলিট করতে চান?")) { await deleteDoc(doc(db, "posts", id)); loadPosts(); }
+        };
+    </script>
+
+    <script>
+        function toggleAuthModal() { document.getElementById('authSection').classList.toggle('hidden'); }
+    </script>
+</body>
+</html>
